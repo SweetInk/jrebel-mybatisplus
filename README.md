@@ -15,7 +15,7 @@ cd jrebel-mybatisplus
 mvn -f jr-mybatisplus/pom.xml clean package
 ```
 
-将构建好的插件`jrebel-mybatisplus/targetjr-mybatisplus.jar`拷贝至任意目录, 比如: `d:\jrebel\plugin\jr-mybatisplus.jar`
+将构建好的插件`jrebel-mybatisplus\target\jr-mybatisplus.jar`拷贝至任意目录, 比如: `d:\jrebel\plugin\jr-mybatisplus.jar`
 
 ## 使用
 
