@@ -1,7 +1,7 @@
 
 # jrebel-mybatisplus
 
-Jrebel mybatplus热加载插件，支持重新加载修改后的SQL映射
+Jrebel mybatisplus热加载插件，支持重新加载修改后的SQL映射
 
 (中文|[English](README-en.md))
 
