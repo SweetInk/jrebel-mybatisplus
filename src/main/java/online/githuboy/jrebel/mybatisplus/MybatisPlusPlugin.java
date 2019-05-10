@@ -30,7 +30,7 @@ public class MybatisPlusPlugin implements Plugin {
 
     @Override
     public boolean checkDependencies(ClassLoader classLoader, ClassResourceSource classResourceSource) {
-        return classResourceSource.getClassResource("org.zeroturnaround.jrebel.mybatis.SqlMapReloader") !=null &&
+        return
          classResourceSource.getClassResource("com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder") != null;
     }
 
