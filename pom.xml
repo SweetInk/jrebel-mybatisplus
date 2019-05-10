@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>online.githuboy</groupId>
+    <artifactId>jr-mybatisplus</artifactId>
+    <name>JRebel MyBatisPlus Plugin</name>
+    <version>1.0</version>
+    <developers>
+        <developer>
+            <name>suchu</name>
+            <email>suchu01@hotmail.com</email>
+            <timezone>GMT+8</timezone>
+            <url>https://github.com/sweetink</url>
+        </developer>
+    </developers>
+    <description>A hook for Support MybatisPlus that reloads modified SQL maps.</description>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sdk.version>7.0.0</sdk.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.zeroturnaround</groupId>
+            <artifactId>jr-sdk</artifactId>
+            <version>${sdk.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.zeroturnaround</groupId>
+            <artifactId>jr-utils</artifactId>
+            <version>${sdk.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>3.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <JavaRebel-Plugin>online.githuboy.jrebel.mybatisplus.MybatisPlusPlugin</JavaRebel-Plugin>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>zt-public</id>
+            <url>https://repos.zeroturnaround.com/nexus/content/groups/zt-public</url>
+        </repository>
+    </repositories>
+
+</project>
