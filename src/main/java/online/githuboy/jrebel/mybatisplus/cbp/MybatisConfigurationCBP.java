@@ -42,23 +42,25 @@ public class MybatisConfigurationCBP extends JavassistClassBytecodeProcessor {
         ctClass.addMethod(CtNewMethod.make("public void afterReloading() {  " + LOGGER + ".info(\"XML configuration were reloaded, restoring memorized interceptors\");  for (java.util.Iterator iter =  __nonXmlInterceptors.iterator(); iter.hasNext(); ) {     Interceptor interceptor = (Interceptor) iter.next();     " + LOGGER + ".info(\"re-adding interceptor: {}\", interceptor);     interceptorChain.addInterceptor(interceptor);  }}", ctClass));
         ctClass.getDeclaredMethod("isResourceLoaded").insertAfter("if (reloader.shouldReload($1)) {  loadedResources.remove($1);  $_ = false;}");
         if (!JavassistUtil.hasDeclaredMethod(ctClass, "getSqlFragments")) {
-            ctClass.addMethod(CtNewMethod.make("public Map getSqlFragments() {  return new HashMap();}", ctClass));
+            ctClass.addMethod(CtNewMethod.make("public Map getSqlFragments() {  return super.getSqlFragments();}", ctClass));
         }
     }
 
     /**
      * Override the `addInterceptor`
+     *
      * @param ctClass CtClass
      */
-    private void overrideAddInterceptor( CtClass ctClass) throws CannotCompileException {
+    private void overrideAddInterceptor(CtClass ctClass) throws CannotCompileException {
         ctClass.addMethod(CtNewMethod.make("public void addInterceptor(org.apache.ibatis.plugin.Interceptor interceptor){ super.addInterceptor(interceptor);}", ctClass));
     }
 
     /**
      * Override the `IsResourceLoaded`
+     *
      * @param ctClass CtClass
      */
-    private void overrideIsResourceLoaded( CtClass ctClass) throws CannotCompileException {
+    private void overrideIsResourceLoaded(CtClass ctClass) throws CannotCompileException {
         ctClass.addMethod(CtNewMethod.make("public boolean isResourceLoaded(String resource){return super.isResourceLoaded(resource);}", ctClass));
     }
 }
