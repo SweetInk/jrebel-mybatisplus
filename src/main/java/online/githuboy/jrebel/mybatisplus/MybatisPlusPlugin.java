@@ -1,10 +1,10 @@
 package online.githuboy.jrebel.mybatisplus;
 
-import online.githuboy.jrebel.mybatisplus.cbp.MybatisConfigurationCBP;
-import online.githuboy.jrebel.mybatisplus.cbp.MybatisMapperAnnotationBuilderCBP;
-import online.githuboy.jrebel.mybatisplus.cbp.MybatisMapperProxyCBP;
-import online.githuboy.jrebel.mybatisplus.cbp.MybatisSqlSessionFactoryBeanCBP;
+import online.githuboy.jrebel.mybatisplus.cbp.*;
 import org.zeroturnaround.javarebel.*;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Plugin Main entry
@@ -13,25 +13,53 @@ import org.zeroturnaround.javarebel.*;
  * @since 2019/5/9 17:56
  */
 public class MybatisPlusPlugin implements Plugin {
+    private static final Logger log = LoggerFactory.getLogger("MyBatisPlus");
+    private final static String MP_MARK_NAME = ".mybatisplus-jr-mark";
 
     @Override
     public void preinit() {
-        LoggerFactory.getLogger("MyBatisPlus").info("Ready config jrebel mybatisplus plugins...");
-
+        log.infoEcho("Ready config JRebel MybatisPlus plugin...");
         ClassLoader classLoader = MybatisPlusPlugin.class.getClassLoader();
         Integration integration = IntegrationFactory.getInstance();
         //register class processor
-        integration.addIntegrationProcessor(classLoader, "com.baomidou.mybatisplus.core.MybatisConfiguration", new MybatisConfigurationCBP());
-        integration.addIntegrationProcessor(classLoader, "com.baomidou.mybatisplus.core.MybatisMapperAnnotationBuilder", new MybatisMapperAnnotationBuilderCBP());
-        integration.addIntegrationProcessor(classLoader, "com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean", new MybatisSqlSessionFactoryBeanCBP());
-        integration.addIntegrationProcessor(classLoader, "com.baomidou.mybatisplus.core.override.MybatisMapperProxy", new MybatisMapperProxyCBP());
+        configMybatisPlusProcessor(integration, classLoader);
+        configMybatisProcessor(integration, classLoader);
+    }
 
+    private void configMybatisPlusProcessor(Integration integration, ClassLoader classLoader) {
+        File mark = new File(MP_MARK_NAME);
+        //if there has MybatisPlus ClassResource
+        if (mark.exists()) {
+            integration.addIntegrationProcessor(classLoader, "com.baomidou.mybatisplus.core.MybatisConfiguration", new MybatisConfigurationCBP());
+            integration.addIntegrationProcessor(classLoader, "com.baomidou.mybatisplus.core.MybatisMapperAnnotationBuilder", new MybatisMapperAnnotationBuilderCBP());
+            integration.addIntegrationProcessor(classLoader, "com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean", new MybatisSqlSessionFactoryBeanCBP());
+            integration.addIntegrationProcessor(classLoader, "com.baomidou.mybatisplus.core.override.MybatisMapperProxy", new MybatisMapperProxyCBP());
+            mark.delete();
+        }
+    }
+
+    private void configMybatisProcessor(Integration integration, ClassLoader classLoader) {
+        integration.addIntegrationProcessor(classLoader, "org.apache.ibatis.builder.xml.XMLMapperBuilder", new XMLMapperBuilderCBP());
     }
 
     @Override
     public boolean checkDependencies(ClassLoader classLoader, ClassResourceSource classResourceSource) {
-        return
-         classResourceSource.getClassResource("com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder") != null;
+        boolean hasMp = classResourceSource.getClassResource("com.baomidou.mybatisplus.core.MybatisSqlSessionFactoryBuilder") != null;
+        File mark = new File(MP_MARK_NAME);
+        if (hasMp) {
+            if (!mark.exists()) {
+                try {
+                    mark.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            if (mark.exists()) {
+                mark.delete();
+            }
+        }
+        return classResourceSource.getClassResource("org.apache.ibatis.session.SqlSessionFactoryBuilder") != null;
     }
 
     @Override

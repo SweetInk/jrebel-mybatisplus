@@ -5,7 +5,7 @@
     <groupId>online.githuboy</groupId>
     <artifactId>jr-mybatisplus</artifactId>
     <name>JRebel MyBatisPlus Plugin</name>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <developers>
         <developer>
             <name>suchu</name>
