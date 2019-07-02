@@ -5,6 +5,10 @@ Jrebel mybatisplus热加载插件，支持重新加载修改后的SQL映射
 
 (中文|[English](README-en.md))
 
+# 前置条件
+
+ **你的IDE安装了[JRebel插件](https://jrebel.com/software/jrebel/download/prev-releases/)**
+ 
 # 如何使用
 
 ## 构建插件
