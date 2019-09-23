@@ -18,7 +18,7 @@ public class MybatisPlusPlugin implements Plugin {
 
     @Override
     public void preinit() {
-        log.infoEcho("Ready config JRebel MybatisPlus plugin...");
+        log.infoEcho(" Ready config JRebel MybatisPlus plugin...");
         ClassLoader classLoader = MybatisPlusPlugin.class.getClassLoader();
         Integration integration = IntegrationFactory.getInstance();
         //register class processor
