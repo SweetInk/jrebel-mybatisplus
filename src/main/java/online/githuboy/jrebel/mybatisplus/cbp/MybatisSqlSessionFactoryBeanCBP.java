@@ -48,9 +48,10 @@ public class MybatisSqlSessionFactoryBeanCBP extends JavassistClassBytecodeProce
 
                 public void edit(NewExpr e) throws CannotCompileException {
                     if ("org.apache.ibatis.builder.xml.XMLMapperBuilder".equals(e.getClassName())) {
-                        e.replace("{  $_ = $proceed($$);  registerMapperLocationToReloader($2, __resource, $3);}");
+                        e.replace("{ $_ = $proceed($$);  registerMapperLocationToReloader($2, __resource, $3);}");
+                    } else if ("com.baomidou.mybatisplus.core.MybatisXMLConfigBuilder".equals(e.getClassName())) {
+                        e.replace("{ $_ = $proceed($$); configuration = $_.getConfiguration(); }");
                     }
-
                 }
 
                 public void edit(MethodCall m) throws CannotCompileException {
@@ -58,8 +59,8 @@ public class MybatisSqlSessionFactoryBeanCBP extends JavassistClassBytecodeProce
                     if ("getInputStream".equals(methodName) && "org.springframework.core.io.Resource".equals(m.getClassName())) {
                         m.replace("{  __resource = $0;  $_ = $proceed($$);}");
                     }
-
                 }
+
 
                 public void edit(FieldAccess f) throws CannotCompileException {
                     if (f.getFieldName().equals("typeAliasesPackage") && ++this.count == 1) {
