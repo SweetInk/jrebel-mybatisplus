@@ -34,7 +34,11 @@ public class MybatisConfigurationCBP extends JavassistClassBytecodeProcessor {
             }
         }
         //rewrite addMappedStatement
-        ctClass.getDeclaredMethod("addMappedStatement").setBody("super.addMappedStatement($1);");
+        String bodyStatement = "";
+        if (null != cp.getOrNull(Constants.MybatisConfiguration$StrictMapClass)) {
+            bodyStatement = "mappedStatements.put($1.getId(), $1);";
+        }
+        ctClass.getDeclaredMethod("addMappedStatement").setBody("{super.addMappedStatement($1);" + bodyStatement + "}");
         ctClass.getDeclaredMethod("addInterceptor").insertBefore("if (!reloader.isInsideConf() && !reloader.isReloading()) {  " + LOGGER + ".info(\"Memorizing non-xml interceptor: {}\", $1);  __nonXmlInterceptors.add($1);}");
         ctClass.addMethod(CtNewMethod.make("public " + Constants.SqlMapReloaderClass + " getReloader() {  return reloader;}", ctClass));
         ctClass.addMethod(CtNewMethod.make("public void reinit() {  loadedResources.clear();  ((" + Constants.JrInterceptorChain + ")  interceptorChain).jrClear();}", ctClass));

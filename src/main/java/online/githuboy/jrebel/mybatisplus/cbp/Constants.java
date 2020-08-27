@@ -11,4 +11,5 @@ public class Constants {
     public static final String SqlMapReloaderClass = "org.zeroturnaround.jrebel.mybatis.SqlMapReloader";
     public static final String JrInterceptorChain = "org.zeroturnaround.jrebel.mybatis.JrInterceptorChain";
     public static final String JrSqlSessionFactoryBeanClass = "org.zeroturnaround.jrebel.mybatis.JrSqlSessionFactoryBean";
+    public static final String MybatisConfiguration$StrictMapClass ="com.baomidou.mybatisplus.core.MybatisConfiguration$StrictMap";
 }
