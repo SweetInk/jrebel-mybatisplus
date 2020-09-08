@@ -51,6 +51,8 @@ public class MybatisSqlSessionFactoryBeanCBP extends JavassistClassBytecodeProce
                         e.replace("{ $_ = $proceed($$);  registerMapperLocationToReloader($2, __resource, $3);}");
                     } else if ("com.baomidou.mybatisplus.core.MybatisXMLConfigBuilder".equals(e.getClassName())) {
                         e.replace("{ $_ = $proceed($$); configuration = $_.getConfiguration(); }");
+                    } else if( "com.baomidou.mybatisplus.core.MybatisConfiguration".equals(e.getClassName())){
+                        e.replace("{ $_ = $proceed($$); configuration = $_; }");
                     }
                 }
 
@@ -70,6 +72,7 @@ public class MybatisSqlSessionFactoryBeanCBP extends JavassistClassBytecodeProce
                 }
             });
         }
+        ctClass.writeFile("D:\\AProject\\github\\jrebel-mybatisplus\\dumped");
     }
 
     private void createRegisterMapperLocationMethod(ClassPool cp, CtClass ctClass) throws CannotCompileException {
