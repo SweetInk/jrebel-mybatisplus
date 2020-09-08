@@ -50,7 +50,7 @@ public class MybatisSqlSessionFactoryBeanCBP extends JavassistClassBytecodeProce
                     if ("org.apache.ibatis.builder.xml.XMLMapperBuilder".equals(e.getClassName())) {
                         e.replace("{ $_ = $proceed($$);  registerMapperLocationToReloader($2, __resource, $3);}");
                     } else if ("com.baomidou.mybatisplus.core.MybatisXMLConfigBuilder".equals(e.getClassName())) {
-                        e.replace("{ $_ = $proceed($$); configuration = $_.getConfiguration(); }");
+                        e.replace("{ $_ = $proceed($$); configuration = (com.baomidou.mybatisplus.core.MybatisConfiguration) $_.getConfiguration(); }");
                     } else if( "com.baomidou.mybatisplus.core.MybatisConfiguration".equals(e.getClassName())){
                         e.replace("{ $_ = $proceed($$); configuration = $_; }");
                     }
