@@ -43,7 +43,7 @@ public class MybatisPlusPlugin implements Plugin {
                 integration.addIntegrationProcessor("com.baomidou.mybatisplus.core.MybatisConfiguration$StrictMap", new StrictMapCBP());
                 mp_v340_mark.delete();
             }
-        }else{
+        } else {
             log.infoEcho("Cannot find mybatis-plus classes in the classpath,please check.");
         }
     }
@@ -75,6 +75,7 @@ public class MybatisPlusPlugin implements Plugin {
                 try {
                     markFile.createNewFile();
                 } catch (IOException e) {
+                    log.infoEcho("markFilePath:" + markFile.getAbsolutePath());
                     e.printStackTrace();
                 }
             }
