@@ -72,7 +72,6 @@ public class MybatisSqlSessionFactoryBeanCBP extends JavassistClassBytecodeProce
                 }
             });
         }
-        ctClass.writeFile("D:\\AProject\\github\\jrebel-mybatisplus\\dumped");
     }
 
     private void createRegisterMapperLocationMethod(ClassPool cp, CtClass ctClass) throws CannotCompileException {
