@@ -15,7 +15,7 @@ Jrebel mybatisplus热加载插件，支持重新加载修改后的SQL映射
  
    > On 'Update' actions: Update classes and resources
  
-   > On frame deactives:  Update classes and resources
+   > On frame deactivation:  Update classes and resources
 
 
 
