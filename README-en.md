@@ -6,6 +6,12 @@ A hook plugin for Support MybatisPlus that reloads modified SQL maps.
 
 # How to use 
 
+## Use IDEA plugin
+
+You can download the plugin from jetbrains plugins market [jrebel-mybatisplus-extension](https://plugins.jetbrains.com/plugin/12682-jrebel-mybatisplus-extension).
+
+## Local build
+
 Running the web app with the custom plugin
 Compile the JRebel plugin like a regular maven project: `mvn -f jr-mybatisplus/pom.xml clean package`. This will produce a plugin jar in jr-mybatisplus/target/jr-mybatisplus.jar. To enable the plugin, pass the plugin’s path to JRebel using a JVM argument: `-Drebel.plugins=/path/to/jr-mybatisplus.jar`.
 
@@ -30,6 +36,7 @@ mvn -f demo-application\pom.xml jetty:run
 Check that the plugin works:
 
 Modify your `Mybatis mapper` xml file. The “Reloading SQL maps” message should appear in the console at the start of the next request.
+
 
 
 # Reference
