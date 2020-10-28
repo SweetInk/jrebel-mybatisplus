@@ -10,7 +10,15 @@ Jrebel mybatisplus热加载插件，支持重新加载修改后的SQL映射
 1. **你的IDE安装了[JRebel插件](https://jrebel.com/software/jrebel/download/prev-releases/)**
 
 2. `mybatis-plus:3.1.1+`
+
+3. IDEA Run/Debug Configurations 配置
  
+   > On 'Update' actions: Update classes and resources
+ 
+   > On frame deactives:  Update classes and resources
+
+
+
 # 如何使用
 
 已开发IDEA的插件 [jrebel-mybatisplus-idea-plugin](https://github.com/SweetInk/jrebel-mybatisplus-idea-plugin). 安装插件后即可使用，不需要再配置了。
