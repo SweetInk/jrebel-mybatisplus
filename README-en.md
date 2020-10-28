@@ -4,6 +4,16 @@ A hook plugin for Support MybatisPlus that reloads modified SQL maps.
 
 ([中文](README.md)|English)
 
+# Preconditions
+
+1. `mybatis-plus:3.1.1+`
+
+2. IDEA Run/Debug Configurations
+ 
+   > On 'Update' actions: Update classes and resources
+ 
+   > On frame deactivation:  Update classes and resources
+
 # How to use 
 
 ## Use IDEA plugin
