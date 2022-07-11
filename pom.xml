@@ -5,13 +5,17 @@
     <groupId>online.githuboy</groupId>
     <artifactId>jr-mybatisplus</artifactId>
     <name>JRebel MyBatisPlus Plugin</name>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <developers>
         <developer>
             <name>suchu</name>
             <email>suchu01@hotmail.com</email>
             <timezone>GMT+8</timezone>
             <url>https://github.com/sweetink</url>
+        </developer>
+        <developer>
+            <name>zeroturnaround</name>
+            <url>https://www.jrebel.com/</url>
         </developer>
     </developers>
     <description>A hook for Support MybatisPlus that reloads modified SQL maps.</description>
