@@ -25,6 +25,11 @@ public class MybatisMapperProxyCBP extends JavassistClassBytecodeProcessor {
             ctClass.getDeclaredMethod("cachedMapperMethod").insertBefore("{  this.methodCache.clear(); }");
         } catch (NotFoundException var3) {
         }
+        //Compatible with mybatis-plus 3.4.0+ https://github.com/baomidou/mybatis-plus/commit/a6ae6ab4e91b126e1212d7041f6bd8365e5ab286
+        try {
+            ctClass.getDeclaredMethod("cachedInvoker").insertBefore("{  this.methodCache.clear(); }");
+        } catch (NotFoundException var3) {
+        }
 
     }
 }
