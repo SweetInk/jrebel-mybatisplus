@@ -1,5 +1,6 @@
 package online.githuboy.jrebel.mybatisplus.cbp;
 
+import com.baomidou.mybatisplus.core.override.MybatisMapperProxy;
 import org.zeroturnaround.bundled.javassist.ClassPool;
 import org.zeroturnaround.bundled.javassist.CtClass;
 import org.zeroturnaround.bundled.javassist.CtField;
@@ -8,7 +9,16 @@ import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodePr
 
 /**
  * MybatisMapperProxyFactory class hook<br>
- * Optimize MybatisMapperProxy so that you do not need to clean all method caches when Mapper is reloaded
+ * <br>
+ * <p>
+ * Optimize {@link MybatisMapperProxy} to clear all method caches when Mapper reloads,
+ * thus avoiding the need for  {@link MybatisMapperProxy} to {@link MybatisMapperProxyCBP#disableMethodCache clean} up the method cache every time the {@link MybatisMapperProxy#invoke} method is executed<br>
+ * </p>
+ * <br>
+ * <b>Known issues</b>
+ * <ol>
+ *     <li>Probabilistic {@link StackOverflowError} is thrown when mapper is modified and reloaded,it only needs to be re-requested.</li>
+ * </ol>
  *
  * @author suchu
  * @since 2022/07/19
@@ -32,7 +42,6 @@ public class MybatisMapperProxyFactoryCBP extends JavassistClassBytecodeProcesso
                 "        }\n" +
                 "}\n" +
                 "}\n");
-        ctClass.writeFile("D:\\git repo\\jrebel-mybatisplus\\dump");
     }
 
 }
