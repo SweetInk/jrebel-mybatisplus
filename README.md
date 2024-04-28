@@ -41,6 +41,23 @@ mvn -f jr-mybatisplus/pom.xml clean package
 
 修改你项目中的mapper xml 文件后，重新编译，如果重新请求接口，你应该会看到控制台输出 “Reloading SQL maps”
 
+## debug相关
+
+### 输出ctClass到本地
+
+```java
+public class YourClassCBP extends JavassistClassBytecodeProcessor {
+   public void process(ClassPool cp, ClassLoader cl, CtClass ctClass) throws Exception {
+      //TODO class modify
+      String output = "X:\\workspace\\dump";
+      ctClass.writeFile(output);
+      if (ctClass.isFrozen()) {
+         ctClass.defrost();
+      }
+   }
+}
+
+```
 
 
 # 参考
