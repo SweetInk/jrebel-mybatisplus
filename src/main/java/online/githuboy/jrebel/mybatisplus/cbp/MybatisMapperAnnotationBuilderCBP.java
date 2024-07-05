@@ -14,13 +14,14 @@ import org.zeroturnaround.javarebel.integration.support.JavassistClassBytecodePr
  * @since 2019/5/9 19:42
  */
 public class MybatisMapperAnnotationBuilderCBP extends JavassistClassBytecodeProcessor {
-
     class LoadXmlResourceHook extends ExprEditor {
         LoadXmlResourceHook() {
         }
 
         public void edit(NewExpr e) throws CannotCompileException {
-            if ("org.apache.ibatis.builder.xml.XMLMapperBuilder".equals(e.getClassName())) {
+            String className = e.getClassName();
+            if ("org.apache.ibatis.builder.xml.XMLMapperBuilder".equals(className) ||
+                    "com.baomidou.mybatisplus.core.MybatisXMLMapperBuilder".equals(className)) {
                 e.replace("{  $_ = $proceed($$);  if ($2 instanceof JrConfiguration) {    SqlMapReloader reloader = ((JrConfiguration) $2).getReloader();    if (reloader != null) {      reloader.addMapping(Resources.getResourceURL($3), $3);    }  }}");
             }
         }
