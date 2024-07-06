@@ -3,6 +3,9 @@ package online.githuboy.jrebel.mybatisplus;
 import online.githuboy.jrebel.mybatisplus.cbp.*;
 import org.zeroturnaround.javarebel.*;
 
+import java.io.IOException;
+import java.util.Properties;
+
 /**
  * Plugin Main entry
  *
@@ -15,7 +18,15 @@ public class MybatisPlusPlugin implements Plugin {
 
     @Override
     public void preinit() {
-        log.infoEcho("Ready config JRebel MybatisPlus plugin...");
+        Properties p = new Properties();
+        String version = "";
+        try {
+            p.load(getClass().getClassLoader().getResourceAsStream("META-INF/maven/online.githuboy/jr-mybatisplus/pom.properties"));
+            version = p.getProperty("version");
+        } catch (IOException e) {
+            log.error("Can not read jr-mybatisplus/pom.properties:", e.getMessage());
+        }
+        log.infoEcho("Ready config JRebel MybatisPlus plugin(" + version + ")...");
         ClassLoader classLoader = MybatisPlusPlugin.class.getClassLoader();
         Integration integration = IntegrationFactory.getInstance();
         //register class processor
